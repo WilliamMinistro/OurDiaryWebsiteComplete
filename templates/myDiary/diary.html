@@ -1,0 +1,87 @@
+
+        {% extends 'accounts/../myDiary/base.html' %}
+
+        {% block title %}
+            <title> Diary </title>
+        {% endblock %}
+
+
+        {% block body %}
+        <br>
+        <div class="container-fluid">
+        <h2 id="subtext">Would you like to post?</h2>
+        <br>
+        <form action = "" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="row">
+                <div class = col-md-6>
+                    <input id ="your_name" type="hidden" name="username" value ="{{ user.username }}">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">How are you feeling?</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="emotion">
+                            <option selected>Neutral</option>
+                            <option value="Happy">Happy</option>
+                            <option value="Sad">Sad</option>
+                            <option value="Excited">Excited</option>
+                            <option value="Worried">Worried</option>
+                            <option value="Nervous">Nervous</option>
+                            <option value="Anxious">Anxious</option>
+                            <option value="Angry">Angry</option>
+                            <option value="Exhausted">Exhausted</option>
+                            <option value="Emotional">Emotional</option>
+                            <option value="Content">Content</option>
+                        </select>
+                    </div>
+                </div>
+                <div class = col-md-6>
+                    <div class="input-group mb-3" style="padding:0px;">
+                        <input type="text" name="task" class="form-control" placeholder="How was your day?" aria-label="How was your day?" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <input type ="submit" name="add" class="btn btn-primary" id="button-addon2"  value = "Submit">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="anon">
+                        <label class="form-check-label" for="exampleCheck1" style="color: white;">Want to be anonymous?</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <br>
+        {% for entry in entries %}
+            {% if entry.anon %}
+                    <div class="row">
+                        <div class ="col-md-10">
+                            <div class="card" style ="padding: 10px; background-color: white; margin:10px; border-radius:.25rem;">
+                                <p class="event"><b>Anonymous is feeling {{ entry.emotion }}:</b>    {{ entry.task }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="text-light" style="padding-left: 10px; font-size:20px;"> Created at: {{ entry.created_at }} by Anonymous </p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+            {% else %}
+                    <div class="row">
+                        <div class ="col-md-10">
+                            <div class="card" style ="padding: 10px; background-color: white; margin:10px; border-radius:.25rem;">
+                                <p class="event"><b>{{ entry.username }} is feeling {{ entry.emotion }}: </b>{{ entry.task }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="text-light" style="padding-left: 10px; font-size:20px;"> Created at: {{ entry.created_at }} by {{ entry.username }} </p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        {% endblock %}

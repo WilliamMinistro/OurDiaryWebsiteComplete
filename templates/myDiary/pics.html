@@ -1,0 +1,49 @@
+{% extends 'accounts/../myDiary/base.html' %}
+        {% block body %}
+            <br>
+
+            <div class="container-fluid">
+                <h2 class = "text-left display-3">
+                    Click below to see a random person's thoughts...
+                </h2>
+            <br>
+            <form action="" method="post">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block" id="button-addon2"  value = "Submit">Random Entry</button>
+            {% csrf_token %}
+            </form>
+            <br>
+            {% for entry in entries %}
+                {% if forloop.counter == rand %}
+                {% if entry.anon %}
+                    <div class="row">
+                        <div class ="col-md-10">
+                            <div class="card" style ="padding: 10px; background-color: white; margin:10px; border-radius:.25rem;">
+                                <p class="event"><b>Anonymous is feeling {{ forloop.counter.emotion }}:</b>    {{ entry.task }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="text-light" style="font-size:20px; padding-right:18px; padding-top:5px;"> Created at: {{ entry.created_at }} by Anonymous </p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                {% else %}
+                    <div class="row">
+                        <div class ="col-md-10">
+                            <div class="card" style ="padding: 10px; background-color: white; margin:10px; border-radius:.25rem;">
+                                <p class="event"><b>{{ entry.username }} is feeling {{ entry.emotion }}: </b>{{ entry.task }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="text-light" style="font-size:20px; padding-right:18px; padding-top:5px;"> Created at: {{ entry.created_at }} by {{ entry.username }} </p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>{
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endblock %}

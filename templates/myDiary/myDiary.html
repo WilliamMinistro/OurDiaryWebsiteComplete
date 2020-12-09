@@ -1,0 +1,41 @@
+
+        {% extends 'accounts/../myDiary/base.html' %}
+
+        {% block title %}
+            <title> myDiary </title>
+        {% endblock %}
+
+
+        {% block body %}
+        <br>
+        <div class="container-fluid">
+            <h2 class = "text-left display-3">
+                Here's what you posted since the beginning...
+            </h2>
+            <br>
+        {% for entry in entries %}
+            {% if entry.username == user.username  %}
+                    <div class="row">
+                        <div class ="col-md-10">
+                            <div class="card" style ="padding: 10px; background-color: white; margin:10px; border-radius:.25rem;">
+                                <p class="event"><b> {{ user.username }} is feeling {{ entry.emotion }}:</b>    {{ entry.task }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class ="col-md-2">
+                            <p class="text-light" style="padding-left: 10px; font-size:20px;"> Created at: {{ entry.created_at }} by {{ user.username }} </p>
+                            <button type="button" class="btn btn-danger pull-right" style="alignment: right; color: black;">
+                                <a href="{% url 'delete' entry.id %}">
+                                    Delete
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+        {% endblock %}

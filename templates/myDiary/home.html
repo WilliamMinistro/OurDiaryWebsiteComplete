@@ -1,0 +1,22 @@
+
+{% extends 'accounts/../myDiary/base.html' %}
+
+{% block body %}
+        <br>
+        <h2 class = "display-3">     Welcome {{ user.username }}!</h2>
+        <br>
+        <div class="padding" style="padding: 30px;">
+        <div class="card" style = "padding: 30px; color: lightgray;">
+            <p class="text-left display-4"style="padding-left: 20px; color: RGB(149, 82, 81);">
+                Welcome to ourDiary, the place for you to share your thoughts and feelings with
+                the world.
+                <br>
+                <br>
+                Remember, you are <b>NEVER</b> alone, and this site aims to show you that.
+                <br>
+                <br>
+                Share thoughts or read the stories of others.
+            </p>
+        </div>
+        </div>
+{% endblock %}

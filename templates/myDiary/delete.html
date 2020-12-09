@@ -1,0 +1,29 @@
+{% extends 'myDiary/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+    <br>
+        <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Delete Task
+            </div>
+            <div class="card-body">
+                <form action = "" method = "post">
+                    {% csrf_token %}
+                    <b> Would you like to delete this entry?
+                        <span style="background-color: rgba(254, 105, 147, 0.1); color: #fe6993; border-radius: 3px; padding: .2em; line-height: 2em;">{{ entry.task }}</span> ?
+                    </b>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-primary" style="alignment: right; background-color: cadetblue; outline-color: cadetblue;">
+                        <a href="{% url 'diary2' %}">No, go Back</a>
+                    </button>
+                    <input type ="submit" button class="btn btn-danger" id="goBack" value = "Yes, Delete" >
+                </form>
+            </div>
+        </div>
+        </div>
+{% endblock %}
