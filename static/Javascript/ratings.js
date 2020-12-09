@@ -4,7 +4,7 @@ $(document).ready(function()
     let djangoNum = 0;
     $('#button-addon2').click(function()
     {
-        $('#subtext').text('Congratulations! You won!');
+        $('#subtext').text('Submitting....');
     })
 
     $('#Rand').click(function(){
